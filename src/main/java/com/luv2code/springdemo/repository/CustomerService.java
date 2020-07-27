@@ -9,14 +9,18 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class CustomerService {
 
     @Autowired
     private CustomerRepository repository;
 
+    @Transactional
     public List<Customer> getCustomers() {
-        List<Customer> customers = repository.findAll();
-        return customers;
+        return repository.getListSortedByLastName();
+    }
+
+    @Transactional
+    public void saveCustomer(Customer customer){
+        repository.save(customer);
     }
 }
